@@ -1,6 +1,8 @@
 package control;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,7 +37,13 @@ public class LoginProc extends HttpServlet {
 
 	public void doProc(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
-		System.out.println("id = " + id);
+		String pass = request.getParameter("password");
+		
+		request.setAttribute("id", id);
+		request.setAttribute("pass", pass);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("LoginProc.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }
